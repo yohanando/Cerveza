@@ -22,13 +22,10 @@ loginRouter.route('/')
             
             req.session.user = user;
 
-            return res.redirect('/');
-            // if (user.strPassword == req.body.password || user.strType == "admin") res.redirect('/login?incorrect');
-            // delete user.password;
-            
-            // req.session.user = user;
-
-            // return res.redirect('/admin');
+            if (user.strType == "admin")
+                res.redirect('/admin')
+            else
+                res.redirect('/')
 
         });
     });
