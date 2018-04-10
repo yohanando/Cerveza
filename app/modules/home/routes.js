@@ -77,6 +77,28 @@ router.post('/inventory/edit', (req, res) => {
         });
       }
   });
+  router.post('/admin/delete', (req, res) => {
+    var db = require('../../lib/database')();{
+      db.query("UPDATE tblinventory  SET intStat = 0 WHERE intProdId = ?",[req.body.id], (err, results, fields)=>{
+        if (err)
+          console.log(err);
+        else{
+          res.redirect('/admin/reports');
+        }
+        });
+      }
+  });
+  router.post('/admin/revert', (req, res) => {
+    var db = require('../../lib/database')();{
+      db.query("UPDATE tblinventory  SET intStat = 1 WHERE intProdId = ?",[req.body.id], (err, results, fields)=>{
+        if (err)
+          console.log(err);
+        else{
+          res.redirect('/admin/reports');
+        }
+        });
+      }
+  });
   router.post('/admin/staffs', (req, res) => {
     var db = require('../../lib/database')();{
         db.query("INSERT INTO tblstaff ( strLname, strFname, strUsername, strPassword, strStatus , intStatus ,strType  ) VALUES ( ?, ?, ?, ? ,  'Available', 0 , 'user' ) ",[req.body.lname, req.body.fname ,req.body.user, req.body.pass], (err, results, fields)=>{
@@ -121,12 +143,22 @@ router.post('/inventory/edit', (req, res) => {
             });
           }
       });
+
 function viewInventory(req, res, next){
   var db = require('../../lib/database')();
-  db.query("SELECT * FROM tblinventory ", function (err, results, fields) {
+  db.query("SELECT * FROM tblinventory WHERE intStat = 1 ", function (err, results, fields) {
       if (err) return res.send(err);
       console.log(results)
       req.inventory = results;
+      return next();
+  });
+}
+function viewDeleted(req, res, next){
+  var db = require('../../lib/database')();
+  db.query("SELECT * FROM tblinventory WHERE intStat = 0", function (err, results, fields) {
+      if (err) return res.send(err);
+      console.log(results)
+      req.dels = results;
       return next();
   });
 }
@@ -182,7 +214,7 @@ function dash(req,res){
     res.render('admin/users/views/index')
 }
 function reports(req,res){
-    res.render('admin/users/views/reports', {reports: req.deleted, available: req.available})
+    res.render('admin/users/views/reports', {reports: req.deleted, available: req.available, deletes: req.dels})
 }
 router.get('/', logout);
 router.get('/inventory', viewInventory, inventory );
@@ -193,11 +225,13 @@ router.get('/server', server );
 router.get('/orders', orders);
 router.get('/deliveries' , deliveries);
 router.get('/admin/staffs' , viewStaffs, staff);
-router.get('/admin/reports' ,viewReports, viewAvailable, reports);
+router.get('/admin/reports' ,viewReports, viewAvailable, viewDeleted, reports);
 router.get('/admin/staffs/edit' , viewStaffs, staff);
 router.get('/admin/staffs/delete' , viewStaffs, staff);
 router.get('/admin/staffs/revert' , viewStaffs, staff);
 router.get("/admin", dash);
+router.get('/admin/delete' , viewInventory, reports);
+router.get('/admin/revert' , viewInventory, reports);
 /**
  * Here we just export said router on the 'index' property of this module.
  */
