@@ -1,9 +1,3 @@
-//- This is the master template. Basically all the other pages will
-//- extend this. This btw, is a Pug comment. This will not appear
-//- in your browser when you render the HTML.
-
-//- See here that I modified this a bit so I can use the base
-//- template for the login page
 extends ./base
 
 block body
@@ -42,11 +36,11 @@ block body
                 //-         span
                 //-             button.btn.btn-primary Admin
 
-            div.container(style="margin-left:5%; margin-right:5%;")
-                block content
+        div.container
+            block content
 
 
-        #footer
+        #footer(style="margin-left:10px;")
             a(href='https://www.instagram.com/pupcerveza', target='_blank') 
                 img(src='assets/src/insta.png', style=height='30px', width='30px', alt='instagram')
             a(href='https://www.facebook.com/pupcerveza/', target='_blank') 

@@ -3,12 +3,12 @@ extends ../../../templates/base
 block body
     - var hasIncorrect = typeof incorrect !== 'undefined' ? 'Incorrect username or password.' : ''
     - var hasUnauthorized = typeof unauthorized !== 'undefined' ? 'You are not authorized to view the page you\'re trying to access. Please log in first.' : ''
-
+    - var unRegistered = typeof unregistered !== 'undefined' ? 'Your account is now in under review by the admin.' : ''
     section.hero.is-dark
         .hero-body
-            if hasIncorrect || hasUnauthorized
+            if hasIncorrect || hasUnauthorized || unRegistered
                 .notification.is-danger
-                    | #{hasIncorrect || hasUnauthorized}
+                    | #{hasIncorrect || hasUnauthorized || unRegistered }
             .columns
                 .column.is-7
                     .container
