@@ -42,7 +42,7 @@ h3 a{ text-decoration: none; }
 
 
 
-.shell { width:988px; margin:0 auto; }
+.shell { width:977px; margin:0 auto; }
 
 #header { height:89px; background-color: #FC9301; white-space:nowrap; padding-bottom: 110px; }
 #header h1{ float:left; display:inline; padding-top:12px; }
@@ -141,7 +141,7 @@ textarea.size1 { height:180px; }
 .add-button:hover { color:#333;}
 
 
-#footer { height:44px; background:url(images/footer.gif); line-height:44px; color:#fff;}
+#footer { height:44px; position: fixed; bottom: 0px; line-height:44px; color:#fff;}
 #footer a{ color:#fff; }
 
 
