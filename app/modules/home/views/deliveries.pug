@@ -1,0 +1,97 @@
+extends ../../../templates/master.pug
+block content
+        link(rel='stylesheet', type='text/css', href='/assets/css/inventory.css')
+        script(type='text/javascript', src='/assets/js/jquery.min.js')
+        link(rel='stylesheet', type='text/css', href='/assets/js/bootstrap.min.css')
+        script(type='text/javascript', src='/assets/js/bootstrap.min.js')
+        br
+        .row
+            .col-sm-12
+                .card(style="width:100%; min-width:300px;")
+                    .card-header
+                        h4.subtitle(style="padding:2px;") Deliveries
+                        .div
+                            button#add(data-toggle='modal', data-target='#addmaterials') Add
+                    .card-block.table-border-style
+                        .table-responsive(style="width:100%; min-width:200px;")
+                            table.table
+                                thead
+                                    tr
+                                        th Delivery No.
+                                        th Supplier Name
+                                        th Product Label
+                                        th Unit
+                                        th Quantity
+                                        th Delivery Start
+                                        th Delivery Recieved
+                                        th Delivery Status
+                                        th Action
+                                        th
+                                tbody
+                                    tr
+                                        th 215321
+                                        td Aling Turing's Delivery, Co.
+                                        td Red Horse
+                                        td Case
+                                        td 20
+                                        td 12:21PM
+                                        td 1:50PM
+                                        td Success
+                                        td 
+                                            button#edit(data-toggle='modal', data-target='#editmaterials') Edit
+                                        td
+                                            button#del(type='button') Delete
+
+            
+            
+            #addmaterials.modal.fade.modal-icon(tabindex='-1', role='dialog', aria-labelledby='addmaterial', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            h4#myModalLabel.modal-title Add Product
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                            .row
+                                .col-md-8
+                                    .form-group
+                                        | Name
+                                        input#name.form-control(type='text', value='')
+                                .col-md-4
+                                    .form-group
+                                        |UOM
+                                        input#name.form-control(type='text', value='')
+                            .row
+                                .col-md-5
+                                    .form-group
+                                        | Quantity
+                                        input#name.form-control(type='email', value='')
+                        .modal-footer
+                            button.btn.btn-secondary(type='submit') Submit
+                            button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+            #editmaterials.modal.fade.modal-icon(tabindex='-1', role='dialog', aria-labelledby='addmaterial', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            h4#myModalLabel.modal-title Edit Product
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                            .row
+                                .col-md-8
+                                    .form-group
+                                        | Name
+                                        input#name.form-control(type='text', value='')
+                                .col-md-4
+                                    .form-group
+                                        |UOM
+                                        input#name.form-control(type='text', value='')
+                            .row
+                                .col-md-5
+                                    .form-group
+                                        | Quantity
+                                        input#name.form-control(type='email', value='')
+                        .modal-footer
+                            button.btn.btn-secondary(type='submit') Submit
+                            button.btn.btn-secondary(type='button', data-dismiss='modal') Close

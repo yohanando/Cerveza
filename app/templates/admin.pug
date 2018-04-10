@@ -1,0 +1,39 @@
+//- This is the master template. Basically all the other pages will
+//- extend this. This btw, is a Pug comment. This will not appear
+//- in your browser when you render the HTML.
+
+//- See here that I modified this a bit so I can use the base
+//- template for the login page
+extends ./base
+
+block body
+    .style
+        link(rel='stylesheet', href='/assets/css/style.css', type='text/css', media='all')
+    #header
+        .shell
+            // Logo + Top Nav
+            #top
+                h1
+                    img(src="source='/assets/images/logocerveza.png", alt="", srcset="")
+                    span.title(style="color:white;") Welcome to Cerveza
+                #top-navigation
+                    a(href='/logout')(style="text-decoration:none;")
+                        .subtitle Log-out
+                // End Logo + Top Nav
+                // Main Nav
+            #navigation
+                ul
+                    li
+                        a(href='/admin')
+                            span Dashboard
+                    li
+                        a(href='/admin/staffs')
+                            span Staffs
+                    li
+                        a(href='/admin/reports')
+                            span Reports
+
+
+
+        div.container(style="margin-left:5%; margin-right:5%;")
+            block content

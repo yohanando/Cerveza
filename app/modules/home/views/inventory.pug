@@ -1,0 +1,165 @@
+
+extends ../../../templates/master.pug
+
+block content
+        link(rel='stylesheet', type='text/css', href='/assets/css/inventory.css')
+        script(type='text/javascript', src='/assets/js/jquery.min.js')
+        link(rel='stylesheet', type='text/css', href='/assets/js/bootstrap.min.css')
+        script(type='text/javascript', src='/assets/js/bootstrap.min.js')
+        //- script(type='text/javascript', src='/assets/js/multi-modal.js')
+
+        br
+        .row
+            .col-sm-12
+                .card(style="width:100%; min-width:300px;")
+                    .card-header
+                        h4.subtitle(style="padding:2px;") Inventory Tab  
+                        div.div-end
+                            button.btn.btn-success(data-toggle='modal', data-target='#addmaterials') Add Product
+                    .card-block.table-border-style
+                        .table-responsive(style="width:100%; min-width:200px;")
+                                table.table
+                                    thead
+                                        tr
+                                            th Product Id
+                                            th Product Name
+                                            th Unit
+                                            th Bar Quantity
+                                            th Storage Quantity
+                                            th Retail Price
+                                            th Actions
+                                            th
+                                    each inventory in inventorytab   
+                                        tr
+                                            th #{inventory.intProdId}
+                                            td #{inventory.strProdName}
+                                            td #{inventory.strUnit}
+                                            td #{inventory.intBarQty}
+                                            td #{inventory.intStorageQty}
+                                            td Php #{inventory.fltRetailPrc}
+                                            td
+                                                if inventory.intStat == 1
+                                                    button.btn.btn-primary(data-toggle='modal', data-target='#editmaterials' data-prodname=inventory.strProdName, data-id=inventory.intProdId, data-uom=inventory.strUnit, data-bar=inventory.intBarQty, data-store=inventory.intStorageQty, data-prc=inventory.fltRetailPrc) Edit
+                                                #editmaterials.modal.fade.modal-icon(tabindex='-1', role='dialog', aria-labelledby='addmaterial', aria-hidden='true')
+                                                    .modal-dialog(role='document')
+                                                        form(method="POST"  action="/inventory/edit")
+                                                                .modal-content
+                                                                    .modal-header
+                                                                        h4#myModalLabel.modal-title Edit Product
+                                                                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                            span(aria-hidden='true') ×
+                                                                    .modal-body
+                                                                            .row
+                                                                                .col-md-8
+                                                                                    .form-group
+                                                                                        | Product Name
+                                                                                        input#prod.form-control(type='text',  name="productname" required)
+                                                                                    .form-group
+                                                                                        | number
+                                                                                        input#id.form-control(type='number',  name="id" required, hidden)
+                                                                            .row    
+                                                                                .col-md-4
+                                                                                    .form-group
+                                                                                        .input.is-primary
+                                                                                            select#uom(name="uom" required)
+                                                                                                option(value='') -- UOM --
+                                                                                                option(value='Case') Case
+                                                                                                option(value='Bucket') Bucket
+                                                                                                option(value='Bottle') Bottle
+                                                                            .row
+                                                                                .col-md-4
+                                                                                    .form-group
+                                                                                        | Bar Quantity
+                                                                                        input#bar.form-control(type='number', name='barqty' required)
+                                                                                .col-md-4
+                                                                                    .form-group
+                                                                                        | Storage Quantity
+                                                                                        input#str.form-control(type='number', name='strqty' required)
+                                                                                .col-md-5
+                                                                                    .form-group
+                                                                                        | Retail Price
+                                                                                        input#prc.form-control(type='number',  name='prc' required)
+                                                                    .modal-footer
+                                                                        button.btn.btn-secondary(type='submit') Submit
+                                                                        button.btn.btn-secondary(type='button', data-dismiss='modal') Close                                                
+                                                if inventory.intStat == 0
+                                                        button.btn.btn-danger(type="button" , disabled) Deleted
+                                            td
+                                                div#buttons
+                                                    if inventory.intStat == 1
+                                                        form(method="POST"  action="/inventory/delete")
+                                                            input#name.form-control(type='number', value=inventory.intProdId name="id" required, hidden)
+                                                            button.btn.btn-danger(type='submit') Delete
+                                                    if inventory.intStat == 0
+                                                        form(method="POST"  action="/inventory/revert")
+                                                            input#name.form-control(type='number', value=inventory.intProdId name="id" required, hidden)
+                                                            button.btn.btn-info(type='submit') Revert                                                    
+
+            
+            
+            #addmaterials.modal.fade.modal-icon(tabindex='-1', role='dialog', aria-labelledby='addmaterial', aria-hidden='true')
+                .modal-dialog(role='document')
+                    form(method="POST"  action="/inventory")
+                        .modal-content
+                            .modal-header
+                                h4#myModalLabel.modal-title Add Product
+                                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    span(aria-hidden='true') ×
+                            .modal-body
+                                .row
+                                    .col-md-8
+                                        .form-group
+                                            | Product Name
+                                            input#name.form-control(type='text', value='' name="productname" required)
+                                .row    
+                                    .col-md-4
+                                        .form-group
+                                            .input.is-primary
+                                                select(name="uom" required)
+                                                    option(value='') -- UOM --
+                                                    option(value='Case') Case
+                                                    option(value='Bucket') Bucket
+                                                    option(value='Bottle') Bottle
+                                .row
+                                    .col-md-4
+                                        .form-group
+                                            | Bar Quantity
+                                            input#name.form-control(type='number', name='barqty' required)
+                                    .col-md-4
+                                        .form-group
+                                            | Storage Quantity
+                                            input#name.form-control(type='number', name='strqty' required)
+                                    .col-md-5
+                                        .form-group
+                                            | Retail Price
+                                            input#name.form-control(type='number', name='prc' required)
+                            .modal-footer
+                                button.btn.btn-secondary(type='submit') Submit
+                                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+        script.
+            $('#editmaterials').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var prodname = button.data('prodname')
+            var id = button.data('id')
+            var uom = button.data('uom')
+            var bar = button.data('bar')
+            var store = button.data('store')
+            var prc = button.data('prc')
+
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id)
+            modal.find('.modal-body #prod').val(prodname)
+            modal.find('.modal-body #bar').val(bar)
+            modal.find('.modal-body #str').val(store)
+            modal.find('.modal-body #prc').val(prc)
+            modal.find('.modal-body #uom').val(uom)
+
+            //- var uom = document.getElementById('uom');
+            //- var opts = uom.options;
+            //- for (var opt, j = 0; opt = opts[j]; j++) {
+            //-     if (opt.value == uom) {
+            //-     uom.selectedIndex = j;
+            //-     break;
+            //-     }
+            //- }
+            })
