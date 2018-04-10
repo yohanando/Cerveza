@@ -79,7 +79,7 @@ router.post('/inventory/edit', (req, res) => {
   });
   router.post('/admin/staffs', (req, res) => {
     var db = require('../../lib/database')();{
-        db.query("INSERT INTO tblstaff ( strLname, strFname, strStatus , intStatus ) VALUES ( ?, ?, 'Available', 1 ) ",[req.body.lname, req.body.fname], (err, results, fields)=>{
+        db.query("INSERT INTO tblstaff ( strLname, strFname, strUsername, strPassword, strStatus , intStatus ,strType  ) VALUES ( ?, ?, ?, ? ,  'Available', 0 , 'user' ) ",[req.body.lname, req.body.fname ,req.body.user, req.body.pass], (err, results, fields)=>{
           if (err)
             console.log(err);
           else{
@@ -101,7 +101,7 @@ router.post('/inventory/edit', (req, res) => {
       });
       router.post('/admin/staffs/delete', (req, res) => {
         var db = require('../../lib/database')();{
-          db.query("UPDATE tblstaff SET intStatus = 0 WHERE intStaffId = ?",[req.body.id], (err, results, fields)=>{
+          db.query("UPDATE tblstaff SET intStatus = 0, strStatus = 'Unavailable' WHERE intStaffId = ?",[req.body.id], (err, results, fields)=>{
             if (err)
               console.log(err);
             else{
@@ -112,7 +112,7 @@ router.post('/inventory/edit', (req, res) => {
       });
       router.post('/admin/staffs/revert', (req, res) => {
         var db = require('../../lib/database')();{
-          db.query("UPDATE tblstaff  SET intStatus = 1 WHERE intStaffId = ?",[req.body.id], (err, results, fields)=>{
+          db.query("UPDATE tblstaff  SET intStatus = 1 , strStatus = 'Available' WHERE intStaffId = ?",[req.body.id], (err, results, fields)=>{
             if (err)
               console.log(err);
             else{
