@@ -14,7 +14,7 @@ block content
                     .card-header
                         h4.subtitle(style="padding:2px;") Server Tab
                         .div
-                            button#add(data-toggle='modal', data-target='#addmaterials') Add
+                            button.btn.btn-success(data-toggle='modal', data-target='#addmaterials') Add
                     .card-block.table-border-style
                         .table-responsive(style="width:100%; min-width:200px;")
                             table.table
@@ -41,22 +41,9 @@ block content
                                         td SUCCESS
                                         td Delivered on Time
                                         td 
-                                            button#edit(data-toggle='modal', data-target='#editmaterials') Edit
+                                            button.btn.btn-primary(data-toggle='modal', data-target='#editmaterials') Edit
                                         td
-                                            button#del(type='button') Delete
-                                    tr
-                                        th 11451
-                                        td FERRARIZ, Marvy E.	
-                                        td Red Horse
-                                        td Bucket
-                                        td 3
-                                        td 3-30-18 | 11:51 
-                                        td Damaged
-                                        td Overfatigued
-                                        td 
-                                            button#edit(data-toggle='modal', data-target='#editmaterials') Edit
-                                        td
-                                            button#del(type='button') Delete
+                                            button.btn.btn-danger(type='button') Delete
 
             
             
@@ -64,24 +51,46 @@ block content
                 .modal-dialog(role='document')
                     .modal-content
                         .modal-header
-                            h4#myModalLabel.modal-title Add Product
+                            h4#myModalLabel.modal-title Add 
                             button.close(type='button', data-dismiss='modal', aria-label='Close')
                                 span(aria-hidden='true') ×
                         .modal-body
                             .row
                                 .col-md-8
                                     .form-group
-                                        | Name
-                                        input#name.form-control(type='text', value='')
-                                .col-md-4
-                                    .form-group
-                                        |UOM
+                                        | Server Name
                                         input#name.form-control(type='text', value='')
                             .row
                                 .col-md-5
                                     .form-group
-                                        | Quantity
-                                        input#name.form-control(type='email', value='')
+                                        |Served Product
+                                        input#name.form-control(type='text', value='')
+                                .col-md-4
+                                    .form-group
+                                        .input.is-primary
+                                            select(name="uom" required)
+                                                option(value='') -- UOM --
+                                                option(value='Case') Case
+                                                option(value='Bucket') Bucket
+                                                option(value='Bottle') Bottle
+                                .col-md-2
+                                    .form-group
+                                        |Quantity
+                                        input#name.form-control(type='number', value='')
+                            .row
+                                .col-md-6
+                                    .form-group
+                                        | Date Served
+                                        input#name.form-control(type="datetime-local")
+                            .row    
+                                .col-md-5
+                                    .form-group
+                                        | Serving Status
+                                        input#name.form-control(type="text")
+                                .col-md-5
+                                    .form-group
+                                        | Serving Description
+                                        input#name.form-control(type="text")
                         .modal-footer
                             button.btn.btn-secondary(type='submit') Submit
                             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
@@ -90,24 +99,46 @@ block content
                 .modal-dialog(role='document')
                     .modal-content
                         .modal-header
-                            h4#myModalLabel.modal-title Edit Product
+                            h4#myModalLabel.modal-title Edit
                             button.close(type='button', data-dismiss='modal', aria-label='Close')
                                 span(aria-hidden='true') ×
                         .modal-body
                             .row
                                 .col-md-8
                                     .form-group
-                                        | Name
-                                        input#name.form-control(type='text', value='')
-                                .col-md-4
-                                    .form-group
-                                        |UOM
+                                        | Server Name
                                         input#name.form-control(type='text', value='')
                             .row
                                 .col-md-5
                                     .form-group
-                                        | Quantity
-                                        input#name.form-control(type='email', value='')
+                                        |Served Product
+                                        input#name.form-control(type='text', value='')
+                                .col-md-4
+                                    .form-group
+                                        .input.is-primary
+                                            select(name="uom" required)
+                                                option(value='') -- UOM --
+                                                option(value='Case') Case
+                                                option(value='Bucket') Bucket
+                                                option(value='Bottle') Bottle
+                                .col-md-2
+                                    .form-group
+                                        |Quantity
+                                        input#name.form-control(type='number', value='')
+                            .row
+                                .col-md-6
+                                    .form-group
+                                        | Date Served
+                                        input#name.form-control(type="datetime-local")
+                            .row    
+                                .col-md-5
+                                    .form-group
+                                        | Serving Status
+                                        input#name.form-control(type="text")
+                                .col-md-5
+                                    .form-group
+                                        | Serving Description
+                                        input#name.form-control(type="text")
                         .modal-footer
                             button.btn.btn-secondary(type='submit') Submit
                             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
