@@ -78,7 +78,7 @@ block content
                                                                                 .col-md-5
                                                                                     .form-group
                                                                                         | Retail Price
-                                                                                        input#prc.form-control(type='number',  name='prc' required)
+                                                                                        input#prc.form-control(type='number',  name='prc' step="any" required)
                                                                     .modal-footer
                                                                         button.btn.btn-secondary(type='submit') Submit
                                                                         button.btn.btn-secondary(type='button', data-dismiss='modal') Close                                                
@@ -132,7 +132,7 @@ block content
                                     .col-md-5
                                         .form-group
                                             | Retail Price
-                                            input#name.form-control(type='number', name='prc' required)
+                                            input#name.form-control(type='number', name='prc' required, step="any" max="999999")
                             .modal-footer
                                 button.btn.btn-secondary(type='submit') Submit
                                 button.btn.btn-secondary(type='button', data-dismiss='modal') Close
