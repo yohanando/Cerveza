@@ -1,6 +1,7 @@
 extends ../../../templates/base
 
 block body
+    
     - var hasIncorrect = typeof incorrect !== 'undefined' ? 'Incorrect username or password.' : ''
     - var hasUnauthorized = typeof unauthorized !== 'undefined' ? 'You are not authorized to view the page you\'re trying to access. Please log in first.' : ''
     - var unRegistered = typeof unregistered !== 'undefined' ? 'Your account is now in under review by the admin.' : ''
@@ -34,3 +35,5 @@ block body
                                         input.input(type="password" name="password")
                         
                         input.button.is-primary.is-pulled-right(type="submit" value="Log-in")
+
+    img(src='assets/src/login.png', alt='helo', height = "100%", width="100%", align="middle")
